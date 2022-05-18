@@ -1,0 +1,86 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/chenhui/my-work/test-csharp-sign/app.csproj": {}
+  },
+  "projects": {
+    "/Users/chenhui/my-work/test-csharp-sign/app.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/chenhui/my-work/test-csharp-sign/app.csproj",
+        "projectName": "app",
+        "projectPath": "/Users/chenhui/my-work/test-csharp-sign/app.csproj",
+        "packagesPath": "/Users/chenhui/.nuget/packages/",
+        "outputPath": "/Users/chenhui/my-work/test-csharp-sign/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/chenhui/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Multiformats.Base": {
+              "target": "Package",
+              "version": "[2.0.2, )"
+            },
+            "Multiformats.Hash": {
+              "target": "Package",
+              "version": "[1.5.0, )"
+            },
+            "Nethereum": {
+              "target": "Package",
+              "version": "[0.95.0--date20210125-0551.git-05a29e9, )"
+            },
+            "Secp256k1.Native": {
+              "target": "Package",
+              "version": "[0.1.24-alpha, )"
+            },
+            "libsecp256k1Zkp.Net": {
+              "target": "Package",
+              "version": "[1.1.10, )"
+            },
+            "xunit.assert": {
+              "target": "Package",
+              "version": "[2.4.2-pre.12, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

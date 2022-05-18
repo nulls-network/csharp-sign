@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)secp256k1.zkp/1.0.17/build/netstandard1.0/Secp256k1.ZKP.targets" Condition="Exists('$(NuGetPackageRoot)secp256k1.zkp/1.0.17/build/netstandard1.0/Secp256k1.ZKP.targets')" />
+    <Import Project="$(NuGetPackageRoot)secp256k1.native/0.1.24-alpha/build/netstandard1.0/Secp256k1.Native.targets" Condition="Exists('$(NuGetPackageRoot)secp256k1.native/0.1.24-alpha/build/netstandard1.0/Secp256k1.Native.targets')" />
+  </ImportGroup>
+</Project>
