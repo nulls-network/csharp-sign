@@ -53,7 +53,7 @@ public class Program
     }
     static async Task CreateOrder(object json)
     {
-        var responseTask = await "http://192.168.10.12:7001/v1/order/create".PostJsonAsync(json);
+        var responseTask = await "https://api-tron-v1.dpay.systems/v1/order/create".PostJsonAsync(json);
         var responseBody = await responseTask.GetStringAsync();
         Console.WriteLine(responseBody);
     }
