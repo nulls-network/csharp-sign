@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "app/1.0.0": {
         "dependencies": {
+          "Flurl.Http": "3.2.4-pre2",
           "Multiformats.Base": "2.0.2",
           "Multiformats.Hash": "1.5.0",
           "Nethereum": "0.95.0--date20210125-0551.git-05a29e9",
@@ -39,6 +40,27 @@
           "lib/netstandard1.0/Common.Logging.Core.dll": {
             "assemblyVersion": "3.4.1.0",
             "fileVersion": "3.4.0.0"
+          }
+        }
+      },
+      "Flurl/3.0.6-pre1": {
+        "runtime": {
+          "lib/netstandard2.0/Flurl.dll": {
+            "assemblyVersion": "3.0.6.0",
+            "fileVersion": "3.0.6.0"
+          }
+        }
+      },
+      "Flurl.Http/3.2.4-pre2": {
+        "dependencies": {
+          "Flurl": "3.0.6-pre1",
+          "Newtonsoft.Json": "12.0.2",
+          "System.Text.Encoding.CodePages": "4.5.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Flurl.Http.dll": {
+            "assemblyVersion": "3.2.4.0",
+            "fileVersion": "3.2.4.0"
           }
         }
       },
@@ -239,6 +261,14 @@
           "System.Threading.Timer": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XDocument": "4.3.0"
+        }
+      },
+      "Newtonsoft.Json/12.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.2.23222"
+          }
         }
       },
       "Portable.BouncyCastle/1.8.5.2": {
@@ -750,6 +780,7 @@
           "Microsoft.NETCore.Targets": "1.1.0"
         }
       },
+      "System.Runtime.CompilerServices.Unsafe/4.5.2": {},
       "System.Runtime.Extensions/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.2.0",
@@ -923,6 +954,12 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.Text.Encoding.CodePages/4.5.1": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.2.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
+        }
+      },
       "System.Text.Encoding.Extensions/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.2.0",
@@ -1031,6 +1068,20 @@
       "path": "common.logging.core/3.4.1",
       "hashPath": "common.logging.core.3.4.1.nupkg.sha512"
     },
+    "Flurl/3.0.6-pre1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dID3nGlJVZta6ygtSze4SQtRnlWYHNR9uav7W9i25OctMDESzVUSxKb2z3qDud+pbzldeAHae/lFGF5/RmOmFg==",
+      "path": "flurl/3.0.6-pre1",
+      "hashPath": "flurl.3.0.6-pre1.nupkg.sha512"
+    },
+    "Flurl.Http/3.2.4-pre2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3YLp5arveWKMXCTekllhiGEBg96rJXExh5Ch0OpjFVw6F7WUnGTRCZ4fyqGBKP5OTf01HutzqJu0UBpoWa58VA==",
+      "path": "flurl.http/3.2.4-pre2",
+      "hashPath": "flurl.http.3.2.4-pre2.nupkg.sha512"
+    },
     "JsonRpcSharp/0.94.0--date20201018-1119.git-05d4006": {
       "type": "package",
       "serviceable": true,
@@ -1107,6 +1158,13 @@
       "sha512": "sha512-WcSp3+vP+yHNgS8EV5J7pZ9IRpeDuARBPN28by8zqff1wJQXm26PVU8L3/fYLBJVU7BtDyqNVWq2KlCVvSSR4A==",
       "path": "netstandard.library/1.6.1",
       "hashPath": "netstandard.library.1.6.1.nupkg.sha512"
+    },
+    "Newtonsoft.Json/12.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
+      "path": "newtonsoft.json/12.0.2",
+      "hashPath": "newtonsoft.json.12.0.2.nupkg.sha512"
     },
     "Portable.BouncyCastle/1.8.5.2": {
       "type": "package",
@@ -1521,6 +1579,13 @@
       "path": "system.runtime/4.3.0",
       "hashPath": "system.runtime.4.3.0.nupkg.sha512"
     },
+    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
+      "path": "system.runtime.compilerservices.unsafe/4.5.2",
+      "hashPath": "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
+    },
     "System.Runtime.Extensions/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -1611,6 +1676,13 @@
       "sha512": "sha512-BiIg+KWaSDOITze6jGQynxg64naAPtqGHBwDrLaCtixsa5bKiR8dpPOHA7ge3C0JJQizJE+sfkz1wV+BAKAYZw==",
       "path": "system.text.encoding/4.3.0",
       "hashPath": "system.text.encoding.4.3.0.nupkg.sha512"
+    },
+    "System.Text.Encoding.CodePages/4.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4J2JQXbftjPMppIHJ7IC+VXQ9XfEagN92vZZNoG12i+zReYlim5dMoXFC1Zzg7tsnKDM7JPo5bYfFK4Jheq44w==",
+      "path": "system.text.encoding.codepages/4.5.1",
+      "hashPath": "system.text.encoding.codepages.4.5.1.nupkg.sha512"
     },
     "System.Text.Encoding.Extensions/4.3.0": {
       "type": "package",

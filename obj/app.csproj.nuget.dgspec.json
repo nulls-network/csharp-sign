@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Flurl.Http": {
+              "target": "Package",
+              "version": "[3.2.4-pre2, )"
+            },
             "Multiformats.Base": {
               "target": "Package",
               "version": "[2.0.2, )"

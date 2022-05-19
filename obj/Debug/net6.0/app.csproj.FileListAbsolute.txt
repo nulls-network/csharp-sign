@@ -63,3 +63,6 @@
 /Users/chenhui/my-work/test-csharp-sign/bin/Debug/net6.0/runtimes/win-arm64/native/secp256k1.dll
 /Users/chenhui/my-work/test-csharp-sign/bin/Debug/net6.0/runtimes/win-x64/native/secp256k1.dll
 /Users/chenhui/my-work/test-csharp-sign/bin/Debug/net6.0/runtimes/win-x86/native/secp256k1.dll
+/Users/chenhui/my-work/test-csharp-sign/bin/Debug/net6.0/Flurl.dll
+/Users/chenhui/my-work/test-csharp-sign/bin/Debug/net6.0/Flurl.Http.dll
+/Users/chenhui/my-work/test-csharp-sign/bin/Debug/net6.0/Newtonsoft.Json.dll
