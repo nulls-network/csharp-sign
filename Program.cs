@@ -42,14 +42,15 @@ public class Program
 
         Console.WriteLine("bytedata:" + bytesData);
 
-
         var signer = new EthereumMessageSigner();
         var sign = signer.EncodeUTF8AndSign("0x" + bytesData, new EthECKey(privateKey));
-
         Console.WriteLine("sign: " + sign);
-
         param.signature = sign;
         await CreateOrder(param);
+
+
+        var addr = Recover();
+        Console.WriteLine("addr: " + addr);
     }
     static async Task CreateOrder(object json)
     {
@@ -65,6 +66,38 @@ public class Program
                 tmpList.Add(singleByte);
         return tmpList.ToArray();
     }
+
+    static  string  Recover(){
+        var param = new notify
+            {
+            out_order_no = "1082331632868",
+            uuid = "17b6d9c5-a59c-491a-8bd3-ad370d1ea82b",
+            merchant_address= "0x2143d11B31b319C008F59c2D967eBF0E5ad2791d",
+            type = "order",
+            amount = "1.5000",
+            amount_hex= "1500000",
+            got_amount= "1.5000",
+            pay_result= "success",
+            token= "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+        };
+        var sign = "0x4cc6c847b0b42483920ed93191504acfd3fb1ad5ff109e672d4f5927a8b8bf47420a9b0461f803b23ad2311a1293c194b4aa4d9d1a424e685c2aaac5a06128fb1b";
+
+
+        using var secp256K1 = new Secp256k1();
+        string[] stringarr;
+        stringarr = new string[9] {param.out_order_no, param.uuid, param.merchant_address, param.type, param.amount,param.amount_hex,param.got_amount,param.pay_result,param.token };
+        List<byte[]> bytesdata = new List<byte[]>();
+        foreach (string str in stringarr)
+        {
+            bytesdata.Add(Encoding.ASCII.GetBytes(str));
+        }
+        var mh = Multihash.Sum<KECCAK_256>(ConvertList(bytesdata));
+
+        
+        var signer  = new MessageSigner();
+        var public_key = signer.EcRecover(mh.Digest,sign);
+        return public_key;
+    }
 }
 
 public class OrderParam
@@ -78,3 +111,21 @@ public class OrderParam
     public string pub_key { get; set; }
     public string version { get; set; }
 }
+
+
+public class notify {
+    public string out_order_no { get;set; }
+    public string uuid {get ; set; }
+    public string merchant_address {get;set;}
+    public string type {get;set;}
+    public string amount {get;set;}
+
+    public string amount_hex {get;set;}
+
+    public string got_amount {get;set;}
+
+    public string pay_result {get;set;}
+
+    public string token{get;set;}
+}
+
