@@ -12,45 +12,9 @@ public class Program
 {
     static async Task Main()
     {
-        var pub_key = "0x2143d11B31b319C008F59c2D967eBF0E5ad2791d";
-        var privateKey = "f78494eb224f875d7e352a2b017304e11e6a3ce94af57b373ae82a73b3496cdd";
-        DateTimeOffset now = (DateTimeOffset)DateTime.UtcNow;
-        Console.WriteLine(now.ToUnixTimeMilliseconds());
-        var param = new OrderParam
-        {
-            out_order_no = now.ToUnixTimeMilliseconds().ToString(),
-            pay_chain = "tron",
-            pay_token = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
-            pay_amount = "1345.96",
-            notify = "http://vapiv2.dummyuat.com/api/callback/DepositCallbackHandler.ashx",
-            signature = "",
-            pub_key = pub_key,
-            version = "1.1"
-        };
-
-        using var secp256K1 = new Secp256k1();
-        string[] stringarr;
-        stringarr = new string[5] { param.out_order_no, param.pay_chain, param.pay_token, param.pay_amount, param.notify };
-        List<byte[]> bytesdata = new List<byte[]>();
-        foreach (string str in stringarr)
-        {
-            bytesdata.Add(Encoding.ASCII.GetBytes(str));
-        }
-        var mh = Multihash.Sum<KECCAK_256>(ConvertList(bytesdata));
-
-        var bytesData = Hex.ToHexString(mh.Digest);
-
-        Console.WriteLine("bytedata:" + bytesData);
-
-        var signer = new EthereumMessageSigner();
-        var sign = signer.EncodeUTF8AndSign("0x" + bytesData, new EthECKey(privateKey));
-        Console.WriteLine("sign: " + sign);
-        param.signature = sign;
-        await CreateOrder(param);
-
-
-        var addr = Recover();
-        Console.WriteLine("addr: " + addr);
+        await order();
+        await order_v1();
+        Recover();
     }
     static async Task CreateOrder(object json)
     {
@@ -58,14 +22,46 @@ public class Program
         var responseBody = await responseTask.GetStringAsync();
         Console.WriteLine(responseBody);
     }
-    static Byte[] ConvertList(List<Byte[]> list)
-    {
-        List<Byte> tmpList = new List<byte>();
-        foreach (Byte[] byteArray in list)
-            foreach (Byte singleByte in byteArray)
-                tmpList.Add(singleByte);
-        return tmpList.ToArray();
+
+
+    static async Task  order(){
+         var privateKey = "f78494eb224f875d7e352a2b017304e11e6a3ce94af57b373ae82a73b3496cdd";
+         DateTimeOffset now = (DateTimeOffset)DateTime.UtcNow;
+        var param = new OrderParam
+        {
+            out_order_no = now.ToUnixTimeMilliseconds().ToString(),
+            pay_chain = "tron",
+            pay_token = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+            pay_amount = "1345.96",
+            notify = "http://vapiv2.dummyuat.com/api/callback/DepositCallbackHandler.ashx",
+            pub_key = "0x2143d11B31b319C008F59c2D967eBF0E5ad2791d",
+        };
+        string[] stringarr = new string[5] { param.out_order_no, param.pay_chain, param.pay_token, param.pay_amount, param.notify };
+        var signature = PaySign.Sign(stringarr,privateKey);
+        param.signature = signature;
+        await CreateOrder(param);
     }
+
+
+    static async Task  order_v1(){
+         var privateKey = "f78494eb224f875d7e352a2b017304e11e6a3ce94af57b373ae82a73b3496cdd";
+         DateTimeOffset now = (DateTimeOffset)DateTime.UtcNow;
+        var param = new OrderParam
+        {
+            out_order_no = now.ToUnixTimeMilliseconds().ToString(),
+            pay_chain = "tron",
+            pay_token = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+            pay_amount = "1345.96",
+            notify = "http://vapiv2.dummyuat.com/api/callback/DepositCallbackHandler.ashx",
+            pub_key = "0x2143d11B31b319C008F59c2D967eBF0E5ad2791d",
+            version = "1.1"
+        };
+        string[] stringarr = new string[5] { param.out_order_no, param.pay_chain, param.pay_token, param.pay_amount, param.notify };
+        var signature = PaySign.Sign_v1(stringarr,privateKey);
+        param.signature = signature;
+        await CreateOrder(param);
+    }
+
 
     static  string  Recover(){
         var param = new notify
@@ -81,24 +77,16 @@ public class Program
             token= "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
         };
         var sign = "0x4cc6c847b0b42483920ed93191504acfd3fb1ad5ff109e672d4f5927a8b8bf47420a9b0461f803b23ad2311a1293c194b4aa4d9d1a424e685c2aaac5a06128fb1b";
-
-
         using var secp256K1 = new Secp256k1();
         string[] stringarr;
         stringarr = new string[9] {param.out_order_no, param.uuid, param.merchant_address, param.type, param.amount,param.amount_hex,param.got_amount,param.pay_result,param.token };
-        List<byte[]> bytesdata = new List<byte[]>();
-        foreach (string str in stringarr)
-        {
-            bytesdata.Add(Encoding.ASCII.GetBytes(str));
-        }
-        var mh = Multihash.Sum<KECCAK_256>(ConvertList(bytesdata));
-
-        
-        var signer  = new MessageSigner();
-        var public_key = signer.EcRecover(mh.Digest,sign);
+        var public_key = PaySign.Recover(stringarr,sign);
+        Console.WriteLine(public_key);
         return public_key;
     }
 }
+
+
 
 public class OrderParam
 {
