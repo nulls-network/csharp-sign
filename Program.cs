@@ -12,9 +12,10 @@ public class Program
 {
     static async Task Main()
     {
-        await order();
-        await order_v1();
-        Recover();
+        // await order();
+        // await order_v1();
+        await bindAddress();
+        // Recover();
     }
     static async Task CreateOrder(object json)
     {
@@ -63,6 +64,25 @@ public class Program
     }
 
 
+    static async Task bindAddress(){
+        var param = new BindAddress
+        {
+            merchant_address ="0x2143d11B31b319C008F59c2D967eBF0E5ad2791d",
+            user_id ="121312312312312",
+            notify ="https://test-notify.vercel.app/api/index",
+            chain_name = "tron"
+        };
+        var privateKey = "f78494eb224f875d7e352a2b017304e11e6a3ce94af57b373ae82a73b3496cdd";
+        string[] stringarr = new string[4] { param.merchant_address, param.user_id, param.notify, param.chain_name };
+        var signature = PaySign.Sign(stringarr,privateKey);
+        param.signature = signature;
+        var responseTask = await "https://api-tron-v1.dpay.systems/v1/bing/merchantBingAddress".PostJsonAsync(param);
+        var responseBody = await responseTask.GetStringAsync();
+        Console.WriteLine(responseBody);
+
+    }
+
+
     static  string  Recover(){
         var param = new notify
             {
@@ -100,7 +120,13 @@ public class OrderParam
     public string version { get; set; }
 }
 
-
+public class BindAddress{
+     public string merchant_address { get; set; }
+     public string user_id { get; set; }
+     public string notify { get; set; }
+     public string signature { get; set; }
+     public string chain_name { get; set; }
+}
 public class notify {
     public string out_order_no { get;set; }
     public string uuid {get ; set; }
